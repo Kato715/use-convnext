@@ -1,0 +1,98 @@
+{
+  "datasets": {
+    "train": {
+      "dir": "./input/train_17_20/*[jpg,tif]",
+      "csv": "./input/train_17_20.csv",
+      "num_folds": 10,
+      "val_fold": 1,
+      "duplicate_aug": [
+      ],
+      "aug": [
+        {
+          "method": "crop_top"
+        },
+        {
+          "method": "SmallestMaxSize",
+          "params": {
+            "max_size": 400,
+            "p": 1
+          }
+        },
+        {
+          "method": "CenterCrop",
+          "params": {
+            "height": 400,
+            "width": 400,
+            "p": 1
+          }
+        },
+        {
+          "method": "Normalize",
+          "params": {
+            "p": 1
+          }
+        }
+      ]
+    },
+    "test": {
+      "dir": "./input/test_17_20/*[jpg,tif]",
+      "csv": "./input/test_17_20.csv",
+      "aug": [
+        {
+          "method": "crop_top"
+        },
+        {
+          "method": "SmallestMaxSize",
+          "params": {
+            "max_size": 400,
+            "p": 1
+          }
+        },
+        {
+          "method": "CenterCrop",
+          "params": {
+            "height": 400,
+            "width": 400,
+            "p": 1
+          }
+        },
+        {
+          "method": "Normalize",
+          "params": {
+            "p": 1
+          }
+        }
+      ]
+    },
+    "real": {
+      "dir": "./input/real_17/*[jpg,tif]",
+      "csv": "./input/real_17_new.csv"
+    },
+    "label_encoder": "./input/label_encoder_17.npy"
+  },
+  "model": {
+    "id": "N175",
+    "type": "convnext-base",
+    "dir": "./models/",
+    "size": [400, 400],
+    "n_classes": 17,
+    "cam_target_layer": "features"
+  },
+  "DataLoader": {
+    "batch_size": 2,
+    "num_workers": 2
+  },
+  "optimizer": {
+    "learning_rate": 0.00015,
+    "betas": [0.8, 0.99],
+    "epsilon": 0.0015,
+    "weight_decay": 0.00015
+  },
+  "scheduler": {
+    "patience": 2,
+    "mode": "max"
+  },
+  "training": {
+    "epoch": 500
+  }
+}
