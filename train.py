@@ -31,8 +31,6 @@ from lib.utils import (
 )
 from torchmetrics import Accuracy, F1Score
 
-# import timm
-
 
 def create_model(conf: Dict) -> tuple:
     model = models.select(conf.model.type, conf.model.n_classes)
